@@ -5,7 +5,7 @@
 
 <layout>
 	<nav>
-		<p> this should be visible alway</p>
+		<p class="text-orange-300"> this should be visible alway</p>
 	</nav>
 	<slot />
 </layout>

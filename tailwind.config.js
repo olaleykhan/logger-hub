@@ -4,7 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        // TODO: add brand colors here
+        green: {
+          DEFAULT: '#639a30',
+          '400': '#639a30',
+          '500': 'hsl(101, 40%, 10%)',
+        },
       },
     },
   },
