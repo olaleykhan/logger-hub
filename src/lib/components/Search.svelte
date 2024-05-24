@@ -1,0 +1,1 @@
+<p> thisd is the search component</p>
