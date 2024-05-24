@@ -3,5 +3,10 @@
 	import "../app.css";
 </script>
 
-<slot />
+<layout>
+	<nav>
+		<p> this should be visible alway</p>
+	</nav>
+	<slot />
+</layout>
 

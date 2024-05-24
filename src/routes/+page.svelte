@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+	import { Search, Results } from '$components';
 </script>
 
 <svelte:head>
@@ -8,8 +9,9 @@
 
 <section>
 
+	<Search />
 
-
+	<Results />
 </section>
 
 
