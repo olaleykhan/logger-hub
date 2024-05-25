@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
-	import FormField from '@smui/form-field';
-	import Button, { Label } from '@smui/button';
 	import { page } from '$app/stores';
 
 	// import { Search } from 'lucide-svelte';
