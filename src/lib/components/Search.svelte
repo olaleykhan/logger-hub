@@ -1,38 +1,37 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
-    import { writable } from 'svelte/store';
+	import { afterNavigate } from '$app/navigation';
+	import FormField from '@smui/form-field';
+	import Button, { Label } from '@smui/button';
+	import { page } from '$app/stores';
+
+	// import { Search } from 'lucide-svelte';
+
+	let searchInput: HTMLInputElement;
+    
+
+	$: searchQuery = $page.params.query || '';
+
+	afterNavigate(() => {
+		searchInput.focus();
+	});
+</script>
+
+<form class="flex items-center space-x-3 p-4 bg-white shadow-lg rounded-lg max-w-md mx-auto mt-10" action="/search" method="GET" role="search">
+	<label for="search-input" class="sr-only">Search</label>
+	<input
+	  bind:this={searchInput}
+	  value={searchQuery}
+	  name="q"
+	  id="search-input"
+	  class="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+	  type="search"
+	  placeholder="login"
+	  aria-label="login"
+	/>
+	<button type="submit" class="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+	  Submit
+	</button>
+  </form>
   
-    const login = writable('');
-    const dispatch = createEventDispatcher<{
-		search: string; // has a required string payload
-	}>();
   
-    function handleSubmit(event: Event) {
-      login.subscribe(value => {
-        if (value.trim() !== '') {
-          dispatch('search', value);
-        }
-      })();
-    }
-  </script>
-  
-  <div class="w-full p-4 shadow-md">
-    <div class="container mx-auto flex items-center justify-between">
-      <h1 class="text-white text-xl font-semibold">GitHub User Search</h1>
-      <form on:submit|preventDefault={handleSubmit} class="flex items-center bg-white shadow rounded-full overflow-hidden">
-        <input 
-          type="text" 
-          bind:value={$login} 
-          placeholder="Enter GitHub login" 
-          class="w-64 p-3 text-gray-700 border-none focus:outline-none rounded-l-full" 
-        />
-        <button 
-          type="submit" 
-          class="px-6 py-2 font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none rounded-r-full"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
-  
+

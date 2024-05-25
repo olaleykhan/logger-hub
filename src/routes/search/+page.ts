@@ -6,5 +6,4 @@ export const load: PageLoad = async ({  url }) => {
 	if (query) {
 		throw redirect(307, `/search/${query}`);
 	}
-
 };

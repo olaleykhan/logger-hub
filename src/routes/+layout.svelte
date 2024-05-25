@@ -1,11 +1,11 @@
 <script>	
 	import "../app.css";	
-	import { Tsearch } from '$components';
+	import { Search } from '$components';
 </script>
 
 <layout>
 	<nav>
-		<Tsearch />
+		<Search />
 	</nav>
 	<slot />
 </layout>

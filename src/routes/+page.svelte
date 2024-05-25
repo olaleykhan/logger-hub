@@ -1,11 +1,5 @@
 <script lang="ts">
-	import { Search, Results } from '$components';
-
-	import type { PageData } from './$types';
-
-	export let data: PageData;
-
-	
+	import Welcome from './Welcome.svelte';
 </script>
 
 <svelte:head>
@@ -16,10 +10,8 @@
 <section>
 	
 
-
-	<!-- <Search on:search={handleSearch} /> -->
-
-	<Results />
+<Welcome />
+	
 </section>
 
 
