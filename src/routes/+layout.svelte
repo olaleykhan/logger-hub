@@ -1,11 +1,11 @@
-<script>
-	
-	import "../app.css";
+<script>	
+	import "../app.css";	
+	import { Tsearch } from '$components';
 </script>
 
 <layout>
 	<nav>
-		<p class="text-orange-300"> this should be visible alway</p>
+		<Tsearch />
 	</nav>
 	<slot />
 </layout>
