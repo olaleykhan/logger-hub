@@ -4,10 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary:{
+          DEFAULT:'#639a30',
+        },
         green: {
           DEFAULT: '#639a30',
           '400': '#639a30',
-          '500': 'hsl(101, 40%, 10%)',
+          '500': '#639a30',
         },
       },
     },
