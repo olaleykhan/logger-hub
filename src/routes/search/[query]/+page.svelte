@@ -98,6 +98,13 @@
 
   <div class="flex justify-center mt-4 items-center space-x-2">
     <button 
+      on:click={() => changePage(1)} 
+      disabled={currentPage === 1} 
+      class="p-1 px-3 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+    >
+      First
+    </button>
+    <button 
       on:click={() => changePage(currentPage - 1)} 
       disabled={currentPage === 1} 
       class="p-1 px-3 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
@@ -122,6 +129,13 @@
       class="p-1 px-3 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
     >
       Next
+    </button>
+    <button 
+      on:click={() => changePage(Math.ceil(data.total_count / 9))} 
+      disabled={currentPage === Math.ceil(data.total_count / 9)} 
+      class="p-1 px-2 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+    >
+      Last
     </button>
   </div>
   
