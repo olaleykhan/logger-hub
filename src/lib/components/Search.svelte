@@ -16,7 +16,7 @@
 	});
 </script>
 
-<form class="flex items-center space-x-3 p-4 bg-white shadow-lg rounded-lg max-w-md mx-auto mt-10" action="/search" method="GET" role="search">
+<form class="flex items-center space-x-3 p-4 bg-white shadow-lg rounded-lg max-w-md mx-auto mt-4" action="/search" method="GET" role="search">
 	<label for="search-input" class="sr-only">Search</label>
 	<input
 	  bind:this={searchInput}
