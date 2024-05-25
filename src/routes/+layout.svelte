@@ -15,16 +15,27 @@
 		width: 100vw;
 		overflow: hidden;
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		flex-direction: column;
+	}
+	.search-container {
+		height: 60px;
+	}
+	.slot-container {
+		height: calc(100vh - 70px);
 	}
 </style>
 
 <div class="full-background">
-	<div>
-		<nav>
-			<Search />
-		</nav>
-		<slot />
+<div class="wrapper">
+	<div class="search-container mx-auto">
+		<Search />
 	</div>
+	<div class="slot-container mx-auto">
+		<slot />
+		
+	</div>
+
+</div>
+
+	
 </div>

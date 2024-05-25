@@ -12,9 +12,13 @@ export const load: PageLoad = async ({ fetch, params, url }) => {
     
     if (response.ok) {
         const data: GithubUserSearch = await response.json();
-        return { items: data.items, total_count: data.total_count, currentPage: page, sort, order };
+        const limitedTotalCount = Math.min(data.total_count, 900); // Limit total count to 100 pages
+        return { items: data.items, total_count: limitedTotalCount, currentPage: page, sort, order };
     }
+
 
     const errorJSON = await response.json();
     throw error(response.status, errorJSON.message);
 };
+
+

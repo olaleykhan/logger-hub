@@ -1,11 +1,11 @@
-<p>
+<h1>
 
     Gracefully handled error !!!
 
-</p>
-<p>
+</h1>
+<h2>
     Page not found
-</p>
+</h2>
 
 <p>
 

@@ -6,6 +6,7 @@
   import { onMount } from 'svelte';
 
   export let data: PageData;
+  export let error: string | null = null;
 
   let ascending = true;
   let activeSort = 'login';
@@ -66,57 +67,62 @@
   <div class="flex justify-center items-center h-screen">
     <div class="loader"></div>
   </div>
+{:else if error}
+  <p class="mt-6 text-center text-red-600">{error}</p>
 {:else if data.items.length > 0}
+ <div class="wrapper mx-auto" >
   <div class="mt-6 bg-white shadow-lg rounded-lg overflow-hidden">
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-            Avatar <SortButton asc={ascending && activeSort === 'avatar_url'} activeSort={activeSort} sort="avatar_url" onClick={() => changeSort('avatar_url')} />
-          </th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-            Login <SortButton asc={ascending && activeSort === 'login'} activeSort={activeSort} sort="login" onClick={() => changeSort('login')} />
-          </th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-            Type <SortButton asc={ascending && activeSort === 'type'} activeSort={activeSort} sort="type" onClick={() => changeSort('type')} />
-          </th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        {#each data.items as result}
-          <tr>
-            <td class="px-6 py-2 whitespace-nowrap">
-              <img src={result.avatar_url} alt={result.login} class="w-10 h-10 rounded-full">
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{result.login}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{result.type}</td>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr class="table-row">
+            <th class="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+              Avatar 
+            </th>
+            <th class="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+              Login <SortButton asc={ascending && activeSort === 'login'} activeSort={activeSort} sort="login" onClick={() => changeSort('login')} />
+            </th>
+            <th class="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+              Type <SortButton asc={ascending && activeSort === 'type'} activeSort={activeSort} sort="type" onClick={() => changeSort('type')} />
+            </th>
           </tr>
-        {/each}
-      </tbody>
-    </table>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          {#each data.items as result}
+            <tr>
+              <td class="px-2 sm:px-6 py-2 whitespace-nowrap">
+                <img src={result.avatar_url} alt={result.login} class="w-10 h-10 rounded-full">
+              </td>
+              <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{result.login}</td>
+              <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{result.type}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="flex justify-center mt-4 items-center space-x-2">
+  <div class="flex flex-wrap justify-center mt-4 items-center space-x-2 min-h-[3rem]">
     <button 
       on:click={() => changePage(1)} 
       disabled={currentPage === 1} 
-      class="p-1 px-3 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+      class="m-1 p-1 px-3 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
     >
       First
     </button>
     <button 
       on:click={() => changePage(currentPage - 1)} 
       disabled={currentPage === 1} 
-      class="p-1 px-3 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+      class="m-1 p-1 px-3 border border-gray-500 text-sm text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
     >
       Previous
     </button>
     
-    <div class="flex space-x-1">
+    <div class="flex space-x-1 text-sm">
       {#each getPages(currentPage, Math.ceil(data.total_count / 9)) as page}
         <button 
           on:click={() => changePage(page)} 
-          class="{page === currentPage ? 'border-green-500 text-green-500' : 'border-gray-500 text-gray-700'} p-1 px-3 border rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+          class="m-1 {page === currentPage ? 'border-green-500 text-green-500 font-bold ' : 'border-gray-500 text-gray-700'} p-1 px-3 border rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
         >
           {page}
         </button>
@@ -126,19 +132,36 @@
     <button 
       on:click={() => changePage(currentPage + 1)} 
       disabled={currentPage === Math.ceil(data.total_count / 9)} 
-      class="p-1 px-3 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+      class="m-1 p-1 px-3 border border-gray-500 text-sm text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-3 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
     >
       Next
     </button>
     <button 
       on:click={() => changePage(Math.ceil(data.total_count / 9))} 
       disabled={currentPage === Math.ceil(data.total_count / 9)} 
-      class="p-1 px-2 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+      class="m-1 p-1 px-2 border border-gray-500 text-gray-700  text-smrounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
     >
       Last
     </button>
   </div>
+ </div>
   
 {:else}
-  <p class="mt-6 text-center text-gray-600">No results found. Please try a different search term.</p>
+  <p class="mt-6 text-center text-gray-600 min-h-[3rem]">No results found. Please try a different search term.</p>
 {/if}
+
+<style>
+  .table-row {
+    
+		overflow-y: auto;
+		/* hide scroll bar style smoothly */
+		scrollbar-width: thin;
+		scrollbar-color: transparent transparent;
+  }
+  .wrapper {
+    display: flex;
+    max-width: 520px;
+    flex-direction: column;
+  }
+  
+</style>
