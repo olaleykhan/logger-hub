@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
-  
+    import { afterNavigate } from '$app/navigation';
     export let id: string;
     export let value: string;
     export let placeholder: string = '';
@@ -13,6 +13,10 @@
     }>();
     
     let inputElement: HTMLInputElement;
+    
+	afterNavigate(() => {
+		inputElement.focus();
+	});
   
     function handleInput(event: Event) {
       const target = event.target as HTMLInputElement;

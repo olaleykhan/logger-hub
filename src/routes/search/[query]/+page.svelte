@@ -4,7 +4,7 @@
 	import SortButton from './SortButton.svelte';
 	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
-	import { Modal } from '$components';
+	import { Modal, Button } from '$components';
 
 	export let data: PageData;
 	export let error: string | null = null;
@@ -63,11 +63,10 @@
 		return pages;
 	}
 
-	// let isModalOpen = $: data.items.length === 0;
 
-  function closeModal() {
-    isModalOpen = false;
-  }
+//   function closeModal() {
+//     isModalOpen = false;
+//   }
 </script>
 
 {#if loading}
@@ -121,6 +120,20 @@
 								>
 								<td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
 									>{result.type}</td
+								>
+								<td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+									>
+										<Button
+										element="a"
+											href={`
+												/${result.login}
+											`}
+											class="bg-blue-500 text-white px-4 py-2 rounded"
+										>
+											View
+										</Button>
+
+									</td
 								>
 							</tr>
 						{/each}

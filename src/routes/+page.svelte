@@ -1,17 +1,1 @@
-<script lang="ts">
-	import Welcome from './Welcome.svelte';
-</script>
-
-<svelte:head>
-	<title>Home Svelte Assignment</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
-<section>
-	
-
-<Welcome />
-	
-</section>
-
-
+<h1> This is the Home page but, it is not supposed to be visible as svelt kit should redirect it ti search immediately for demo purposes</h1>

@@ -3,13 +3,8 @@
 	import { page } from '$app/stores';
 	import {Button, TextField} from '$components'
 
-	let searchInput: HTMLInputElement;
-
 	$: searchQuery = $page.params.query || '';
 
-	// afterNavigate(() => {
-	// 	searchInput.focus();
-	// });
 </script>
 
 <form class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-3 p-2 bg-white shadow-lg rounded-lg max-w-md mx-auto mt-4" action="/search" method="GET" role="search">
@@ -25,7 +20,7 @@
 	  aria-label="login"
 	/> -->
 
-	<TextField
+	<TextField	
   id="search-input"
   value={searchQuery}
   name="q"
