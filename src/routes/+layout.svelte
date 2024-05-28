@@ -1,34 +1,28 @@
 <script>	
 	import "../app.css";	
-	import { Search } from '$components';
+	import {Button} from "$components";
 </script>
 
+<main>
+	<div>
+		
+
+<nav class="bg-white border-gray-200" >
+	<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 py-1 ">
+	<a href="/search" class="text-green-700 hover:text-green-300 font-bold ">
+		Home
+	</a>
+	</div>
+  </nav>
+  
+	</div>
+	<div class="slot" >
+		<slot />
+	</div>
+</main>
+
 <style>
-	.full-background {
-		background-size: cover;
-		background-position: center;
-		height: 100vh;
-		width: 100vw;
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-	}
-	.slot-container {
-		height: calc(100vh - 70px);
+	.slot {
+		height: calc(100vh - 32px);
 	}
 </style>
-
-<div class="full-background">
-<div class="wrapper">
-	<div class=" mx-auto">
-		<Search />
-	</div>
-	<div class="slot-container mx-auto">
-		<slot />
-		
-	</div>
-
-</div>
-
-	
-</div>

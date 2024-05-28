@@ -15,8 +15,6 @@ export const load: PageLoad = async ({ fetch, params, url }) => {
         const limitedTotalCount = Math.min(data.total_count, 900); // Limit total count to 100 pages
         return { items: data.items, total_count: limitedTotalCount, currentPage: page, sort, order };
     }
-
-
     const errorJSON = await response.json();
     throw error(response.status, errorJSON.message);
 };
