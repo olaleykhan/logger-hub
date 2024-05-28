@@ -64,9 +64,7 @@
 	}
 
 
-//   function closeModal() {
-//     isModalOpen = false;
-//   }
+
 </script>
 
 {#if loading}
@@ -138,22 +136,8 @@
 	</div>
   </div>
   
-{:else}
-	<Modal>
-		<div class="text-center">
-			<h2 class="text-2xl font-semibold mb-4">Welcome to the Futuristic Modal</h2>
-			<p class="mb-4">
-				This is a beautiful, modern, and professional modal using Svelte and Tailwind CSS.
-			</p>
-		</div>
-		<button
-			slot="close"
-			class="text-white bg-red-500 hover:bg-red-700 rounded-full px-4 py-2"
-			on:click={closeModal}
-		>
-			Close
-		</button>
-	</Modal>
+{:else}  	
+  <p class="mt-6 text-center text-gray-600 min-h-[3rem]">No results found. Please try a different search term.</p>
 {/if}
 
 <style>
