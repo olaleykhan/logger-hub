@@ -76,118 +76,68 @@
 {:else if error}
 	<p class="mt-6 text-center text-red-600">{error} haba ewo tun leleyi</p>
 {:else if data.items.length > 0}
-	<div class="wrapper mx-auto">
-		<div class="mt-6 bg-white shadow-lg rounded-lg overflow-hidden">
-			<div class="overflow-x-auto">
-				<table class="min-w-full divide-y divide-gray-200">
-					<thead class="bg-gray-50">
-						<tr class="table-row">
-							<th
-								class="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-							>
-								Avatar
-							</th>
-							<th
-								class="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-							>
-								Login <SortButton
-									asc={ascending && activeSort === 'login'}
-									{activeSort}
-									sort="login"
-									onClick={() => changeSort('login')}
-								/>
-							</th>
-							<th
-								class="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-							>
-								Type <SortButton
-									asc={ascending && activeSort === 'type'}
-									{activeSort}
-									sort="type"
-									onClick={() => changeSort('type')}
-								/>
-							</th>
-						</tr>
-					</thead>
-					<tbody class="bg-white divide-y divide-gray-200">
-						{#each data.items as result}
-							<tr>
-								<td class="px-2 sm:px-6 py-2 whitespace-nowrap">
-									<img src={result.avatar_url} alt={result.login} class="w-10 h-10 rounded-full" />
-								</td>
-								<td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-									>{result.login}</td
-								>
-								<td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-									>{result.type}</td
-								>
-								<td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-									>
-										<Button
-										element="a"
-											href={`
-												/${result.login}
-											`}
-											variant="outlined"
-											style="height: 1.8rem; "
-										>
-											View
-										</Button>
-
-									</td
-								>
-							</tr>
-						{/each}
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-		<div class="flex flex-wrap justify-center mt-4 items-center space-x-2 min-h-[3rem]">
-			<button
-				on:click={() => changePage(1)}
-				disabled={currentPage === 1}
-				class="m-1 p-1 px-3 border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
-			>
-				First
-			</button>
-			<button
-				on:click={() => changePage(currentPage - 1)}
-				disabled={currentPage === 1}
-				class="m-1 p-1 px-3 border border-gray-500 text-sm text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
-			>
-				Previous
-			</button>
-
-			<div class="flex space-x-1 text-sm">
-				{#each getPages(currentPage, Math.ceil(data.total_count / 9)) as page}
-					<button
-						on:click={() => changePage(page)}
-						class="m-1 {page === currentPage
-							? 'border-green-500 text-green-500 font-bold '
-							: 'border-gray-500 text-gray-700'} p-1 px-3 border rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-					>
-						{page}
-					</button>
-				{/each}
-			</div>
-
-			<button
-				on:click={() => changePage(currentPage + 1)}
-				disabled={currentPage === Math.ceil(data.total_count / 9)}
-				class="m-1 p-1 px-3 border border-gray-500 text-sm text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-3 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
-			>
-				Next
-			</button>
-			<button
-				on:click={() => changePage(Math.ceil(data.total_count / 9))}
-				disabled={currentPage === Math.ceil(data.total_count / 9)}
-				class="m-1 p-1 px-2 border border-gray-500 text-gray-700 text-smrounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
-			>
-				Last
-			</button>
-		</div>
+<div class="wrapper mx-auto h-full">
+	<div class="mt-6 bg-white shadow-lg rounded-lg overflow-hidden h-full flex flex-col">
+	  <div class="overflow-x-auto">
+		<table class="min-w-full divide-y divide-gray-200">
+		  <thead class="bg-gray-50">
+			<tr class="table-row">
+			  <th class="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+				Avatar
+			  </th>
+			  <th class="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+				Login <SortButton asc={ascending && activeSort === 'login'} {activeSort} sort="login" onClick={() => changeSort('login')} />
+			  </th>
+			  <th class="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+				Type <SortButton asc={ascending && activeSort === 'type'} {activeSort} sort="type" onClick={() => changeSort('type')} />
+			  </th>
+			</tr>
+		  </thead>
+		  <tbody class="bg-white divide-y divide-gray-200 overflow-y-auto " >
+			{#each data.items as result}
+			  <tr>
+				<td class="px-2 sm:px-6 py-2 whitespace-nowrap">
+				  <img src={result.avatar_url} alt={result.login} class="w-10 h-10 rounded-full" />
+				</td>
+				<td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{result.login}</td>
+				<td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{result.type}</td>
+				<td class="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+				  <Button element="a" href={`/${result.login}`} variant="outlined" style="height: 1.8rem;">
+					View
+				  </Button>
+				</td>
+			  </tr>
+			{/each}
+		  </tbody>
+		</table>
+	  </div>
 	</div>
+  
+	<div class="flex flex-wrap justify-center mt-4 items-center space-x-2 min-h-[6rem]">
+	  <button title="first" on:click={() => changePage(1)} disabled={currentPage === 1} class="m-1 p-1 px-3 font-bold border border-gray-500 text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed">
+		&lt;&lt;
+	  </button>
+	  <button title="prev" on:click={() => changePage(currentPage - 1)} disabled={currentPage === 1} class="m-1 p-1 px-3 font-bold border border-gray-500 text-sm text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed">
+		&lt;
+	  </button>
+  
+	  <div class="flex space-x-1 text-sm">
+		{#each getPages(currentPage, Math.ceil(data.total_count / 9)) as page}
+		  <button on:click={() => changePage(page)} class="m-1 {page === currentPage ? 'border-green-500 text-green-500 font-bold ' : 'border-gray-500 text-gray-700'} p-1 px-3 border rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500">
+			{page}
+		  </button>
+		{/each}
+	  </div>
+  
+	  <button title="next" on:click={() => changePage(currentPage + 1)} disabled={currentPage === Math.ceil(data.total_count / 9)} class="m-1 p-1 px-3 font-bold border border-gray-500 text-sm text-gray-700 rounded hover:bg-gray-100 focus:outline-none focus:ring-3 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 font-bolddisabled:cursor-not-allowed">
+		&gt;
+	  </button>
+	  <button title="last" on:click={() => changePage(Math.ceil(data.total_count / 9))} disabled={currentPage === Math.ceil(data.total_count / 9)} class="m-1 p-1 px-2 font-bold border border-gray-500 text-gray-700 text-sm rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed">
+		&gt;&gt;
+	  </button>
+	</div>
+  </div>
+  
 {:else}
 	<Modal>
 		<div class="text-center">

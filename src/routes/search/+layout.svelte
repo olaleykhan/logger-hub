@@ -7,13 +7,19 @@
 		background-size: cover;
 		background-position: center;
 		height: 100%;
-		width: 100vw;
+		/* width: 100vw; */
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 	}
 	.slot-container {
-		/* height: calc(100vh - 70px); */
+		height: calc(100vh - 110px);
+	}
+	/* media query for mobile since header will be taller */
+	@media (max-width: 640px) {
+		.slot-container {
+			height: calc(100vh - 10rem);
+		}
 	}
 </style>
 

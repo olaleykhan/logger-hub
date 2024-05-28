@@ -1,5 +1,7 @@
 <script lang="ts">
     import { page } from '$app/stores';
+	import Button from '$components/Button.svelte';
+    import { browser } from "$app/environment";
 
     let user: string | null = null;
 
@@ -14,7 +16,7 @@
     }
 </style>
 
-<div class="flex h-full bg-gray-600">
+<div class="flex h-full bg-transparent">
     <!-- Sidebar -->
     <nav class="sidebar bg-transparent shadow-lg p-6 w-4">
         <ul class="space-y-4">
@@ -29,7 +31,10 @@
 
     <!-- Main Content -->
     <div class="flex-1 p-6">
-        <h1 class="text-2xl font-bold mb-4">This is the layout of the user page</h1>
+        <div class="container">
+            <Button element="a" href={`/search/${user}`} variant="outlined"> Back </Button>
+
+        </div>
         <slot />
     </div>
 </div>
