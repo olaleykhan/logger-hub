@@ -128,7 +128,8 @@
 											href={`
 												/${result.login}
 											`}
-											class="bg-blue-500 text-white px-4 py-2 rounded"
+											variant="outlined"
+											style="height: 1.8rem; "
 										>
 											View
 										</Button>
@@ -218,6 +219,6 @@
 		flex-direction: column;
 	}
 	.open-modal-button {
-		@apply bg-blue-500 text-white px-4 py-2 rounded;
+		@apply bg-green-500 text-white px-4 py-2 rounded;
 	}
 </style>

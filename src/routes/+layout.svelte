@@ -1,34 +1,22 @@
 <script>	
 	import "../app.css";	
-	import Search  from './Search.svelte';
+	import {Button} from "$components";
 </script>
 
-<style>
-	.full-background {
-		background-size: cover;
-		background-position: center;
-		height: 100vh;
-		width: 100vw;
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-	}
-	.slot-container {
-		height: calc(100vh - 70px);
-	}
-</style>
-
-<div class="full-background">
-<div class="wrapper">
-	<div class=" mx-auto">
-		<Search />
-	</div>
-	<div class="slot-container mx-auto">
-		<slot />
+<main>
+	<div>
 		
+
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+	<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+	<Button element="a" href="/search" class="flex items-center space-x-3 rtl:space-x-reverse">
+		<span class="self-center text-2xl font-semibold whitespace-nowrap text-green-500 ">Home</span>
+	</Button>
 	</div>
-
-</div>
-
-	
-</div>
+  </nav>
+  
+	</div>
+	<div  >
+		<slot />
+	</div>
+</main>
